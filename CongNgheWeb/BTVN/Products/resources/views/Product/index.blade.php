@@ -1,10 +1,12 @@
+</html>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Management Issue</title>
+    <title>Management Products</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -219,10 +221,10 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-5">
-                            <h2>Management Issue</h2>
+                            <h2>Management Products</h2>
                         </div>
                         <div class="col-sm-7">
-                            <a href="{{ route('Issue.create') }}"><button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button></a>
+                            <a href="{{ route('product.create') }}"><button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button></a>
                         </div>
                     </div>
                 </div>
@@ -234,27 +236,24 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Reporter_by</th>
-                            <th>Reporter_date</th>
+                            <th>Product name</th>
                             <th>Description</th>
-                            <th>Urgency</th>
-                            <th>Status</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                            <th>Category</th>
                             <th>Action</th>
                         </tr>
-
                     </thead>
                     <tbody>
                         @foreach ($data as $item)
                         <tr>
-                            <td>{{ $item->computer->computer_name }}</td>
-                            <td>{{ $item->reporter_by }}</td>
-                            <td>{{ date('d/m/Y H:i', strtotime($item->reporter_date)) }}</td> <!-- Ngày bán (định dạng ngày) -->
-                            <td>{{ $item->description }}</td>
-                            <td>{{ $item->urgency }}</td>
-                            <td>{{ $item->status }}</td>
+                            <td>{{ $item->product_name }}</td> <!-- Tên thuốc -->
+                            <td>{{ $item->description }} </td> <!-- Giá (định dạng tiền tệ) -->
+                            <td>{{ $item->price }} VND</td> <!-- Số lượng -->
+                            <td><img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->product_name }}" width="150"></td>
+                            <td>{{ $item->category_name }}</td> <!-- Số điện thoại khách hàng -->
                             <td>
-                                <a href="{{ route('Issue.edit', $item->id) }}" class="edit" title="Edit">
+                                <a href="{{ route('product.edit', $item->id) }}" class="edit" title="Edit">
                                     <button class="btn btn-secondary" type="button">Edit</button>
                                 </a>
                                 <div class="text-center">
@@ -278,7 +277,7 @@
                                                 <p>Do you really want to delete this record? This process cannot be undone.</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="{{ route('Issue.destroy', $item->id) }}" method="POST">
+                                                <form action="{{ route('product.destroy', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -307,4 +306,5 @@
         </div>
     </div>
 </body>
+
 </html>
